@@ -1,0 +1,190 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="Generator" content="EditPlus®">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  <title>Document</title>
+  <script>
+	function validateDate() {
+		document.getElementById("d1").innerHTML = "";
+		document.getElementById("d2").innerHTML = "";
+		document.getElementById("d3").innerHTML = "";
+		document.getElementById("d4").innerHTML = "";
+		document.getElementById("d5").innerHTML = "";
+		document.getElementById("d6").innerHTML = "";
+		document.getElementById("d7").innerHTML = "";
+		document.getElementById("d8").innerHTML = "";
+		document.getElementById("d9").innerHTML = "";
+		var userNo = document.myform.userNo.value;
+		if(userNo == "") {
+			document.getElementById("d1").innerHTML = "账号不能为空";
+			return;
+		}
+		var r = /^\w{3,}$/;
+		if(!r.test(userNo)) {
+			document.getElementById("d1").innerHTML = "账号只能是a-z或数字或_构成";
+			return;
+		}
+
+		var userName = document.myform.userName.value;
+		if(userName == "") {
+			document.getElementById("d2").innerHTML = "昵称不能为空";
+			return;
+		}
+		r = /^\d+$/;
+			if(r.test(userName)) {
+				document.getElementById("d2").innerHTML = "昵称不能有数字";
+				return;
+			}
+		
+		var userPwd = document.myform.userPwd.value;
+		if(userPwd.length < 6) {
+			document.getElementById("d3").innerHTML = "密码最少6位";
+			return;
+		}
+		var userEPwd = document.myform.userEPwd.value;
+		if(userPwd != userEPwd) {
+			document.getElementById("d4").innerHTML = "两次密码不一致";
+			return;
+		}
+		var sexs = document.getElementsByName("userSex");
+		var sexFlag = false;
+		for(var i = 0;i < sexs.length;i++) {
+			if(sexs[i].checked) {
+				sexFlag = true;
+				break;
+			}
+		}
+		if(!sexFlag) {
+			document.getElementById("d5").innerHTML = "请选择性别";
+			return;
+		}
+		var userYear = document.myform.userYear.value.trim();
+		if(userYear == "") {
+			document.getElementById("d6").innerHTML = "请输入出生年份";
+			return;
+		}
+		if(isNaN(userYear)) {
+			document.getElementById("d6").innerHTML = "年份必须是数值";
+			return;
+		}
+
+		if(userYear.indexOf(".")!= -1) {
+			document.getElementById("d6").innerHTML = "年份必须是整数";
+			return;
+		}
+
+		var now = new Date();
+		var year = now.getYear()+1900;
+		if(parseInt(userYear) < 1900||parseInt(userYear) > year) {
+			document.getElementById("d6").innerHTML = "年份非法";
+			return;
+		}
+		
+		var userMonth = document.myform.userMonth.value;
+		if(parseInt(userYear) == year && parseInt(userMonth) > now.getMonth()+1) {
+			document.getElementById("d7").innerHTML = "月份非法";
+			return;
+		}
+
+		var userDate = document.myform.userDate.value;
+		if(userDate == "") {
+			document.getElementById("d8").innerHTML = "日必须填写"
+			return;
+		}
+
+		if(isNaN(userDate)) {
+			document.getElementById("d8").innerHTML = "日必须为数值"
+			return;
+		}
+
+		var ud = parseInt(userDate);
+		if(ud < 1 || ud >getMaxDate(parseInt(userYear),parseInt(userMonth))) {
+			document.getElementById("d8").innerHTML = "日期非法";
+			return;
+		}
+
+		if(parseInt(userYear) == year && parseInt(userMonth) == now.getMonth()+1 && ud > now.getDate()) {
+			document.getElementById("d8").innerHTML = "日期非法";
+			return;
+		}
+
+		var check = document.getElementsByName("checkboxs");
+		var checkFlag = false;
+		for(var i = 0;i < check.length;i++) {
+			if(check[i].checked) {
+				checkFlag = true;
+				break;
+			}
+		}
+		if(!checkFlag) {
+			document.getElementById("d9").innerHTML = "请选择";
+			return;
+		}
+		document.myform.submit();
+	}
+	function getMaxDate(year,month) {
+		var dates = [[31,29,31,30,31,30,31,31,30,31,30,31],[31,28,31,30,31,30,31,31,30,31,30,31]];
+		if(year % 100 != 0 && year % 4 == 0 || year % 400 == 0){
+			return dates[0][month-1];
+		}
+		return dates[1][month-1]
+	}
+	function sure(obj) {
+		document.getElementById("btn").disabled = ! obj.checked;
+	} 
+  </script>
+ </head>
+ <body bgcolor="Pink">
+	<form action = "selectAllOrBack.html" method="post" name="myform">
+	<p><h1>用户注册</h1></p>
+		用户账号:<input type="text" name="userNo"  tabindex="1">&nbsp;<font color="red">*</font>
+		<div id="d1" style="display:inline"></div><br>
+		用户昵称:<input type="text" name="userName"  tabindex="2">&nbsp;<font color="red">*</font>
+		<div id="d2" style="display:inline"></div><br>
+		用户密码:<input type="password" name="userPwd" size ="21" tabindex="3">&nbsp;<font color="red">*</font>
+		<div id="d3" style="display:inline"></div><br>
+		确认密码:<input type="password" name="userEPwd" size ="21" tabindex="4">&nbsp;<font color="red">*</font>
+		<div id="d4" style="display:inline"></div><br>
+		性别:<input type="radio" name="userSex" value="男">男&nbsp;
+		<input type="radio" name="userSex" value="女">女&nbsp;<div id="d5" style="display:inline"></div><br>
+		出生日期:<input type="text" name="userYear" size="4">年&nbsp;<div id="d6" style="display:inline"></div><br>
+			 <select name="userMonth">
+				<optgroup label="第一季"> 
+				<option value="1">1月</option>
+				<option value="1">2月</option>
+				<option value="1">3月</option>
+				</optgroup>
+				<optgroup label="第二季"> 
+				<option value="1">4月</option>
+				<option value="1">5月</option>
+				<option value="1" selected="selected">6月</option>
+				</optgroup>
+				<optgroup label="第三季"> 
+				<option value="1">7月</option>
+				<option value="1">8月</option>
+				<option value="1">9月</option>
+				</optgroup>
+				<optgroup label="第四季"> 
+				<option value="1">10月</option>
+				<option value="1">11月</option>
+				<option value="1">12月</option>
+				</optgroup>
+			 </select>月&nbsp;<div id="d7" style="display:inline"></div><br>
+			 <input type="text" name="userDate" size="2" maxlength = "2">日<div id="d8" style="display:inline"></div><br>
+			 你是从哪里知道我们的:<input type="checkboxs" name="checkbox" value="电视">电视
+			 <input type="checkbox" name="checkboxs" value="报纸">报纸
+			 <input type="checkbox" name="checkboxs" value="微博">微博
+			 <input type="checkbox" name="checkboxs" value="百度">百度&nbsp;<div id="d9" style="display:inline"></div><br><br>
+			 <input type="reset" name="chongzhi" value="重置">&nbsp;&nbsp;&nbsp;<!--重置按钮 -->
+			 <input type="button" name="chongzhi" id = "btn" value="同意以下协议，并注册" onclick = "validateDate()" disabled ="disabled"><br><br>
+			 <textarea name="demo" rows="3" cols="40" readonly="readonly">
+协议，网络协议的简称，网络协议是通信计算机双方必须共同遵从的一组约定。
+			 </textarea><br>
+			 <input type="checkbox" name="enter" value="同意" onclick = "sure(this)">同意
+	</form>	
+	</body>
+</html>

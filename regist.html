@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="Generator" content="EditPlus®">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  <title>Document</title>
+  <script>
+	function getValue(){
+		returnValue = document.myForm.userNo;
+		close();
+		}
+
+	function validateData(){
+		var userNo = document.myForm.userNo.value;
+		document.getElementById("msgNo").innerHTML = "<font color = 'red'>*</font>";
+		if(userNo == ""){
+			document.getElementById("msgNo").innerHTML = "<font color = 'red'>请输入帐号</font>";
+			document.getElementById("uNo").style = "border-color : red;";
+			return;
+			}
+		var reg = /^[a-z0-9_]{3,}$/ig;
+		if(!reg.test(userNo)){
+					document.getElementById("msgNo").innerHTML =
+					"<font color = 'red'>帐号只能是数字、字母、下划线！</font>";
+					document.getElementById("uNo").select();
+					document.getElementById("uNo").style = "border-color : red;";
+					return;
+			}
+		var userName = document.myForm.userName.value;
+				reg = /^[^\d]+$/;
+				if(!userName.test(reg)){
+					document.getElementById("msgName").innerHTML = 
+					"<font color = 'red'>昵称不能有数字！</font>";
+					document.getElementById("uName").select();
+					document.getElementById("uName").style = "border-color : red;";
+					return;
+			}
+
+		var userPwd = document.myForm.userPwd.value;
+		var userEPwd = document.myForm.userEPwd.value;
+		document.getElementById("msgPwd").innerHTML = "<font color = 'red'>*</font>";
+		document.getElementById("msgEPwd").innerHTML = "<font color = 'red'>*</font>";
+
+		reg = /^[\w]{6,}$/;
+		if(!userPwd.test(reg)){
+					document.getElementById("msgPwd").innerHTML =
+					"<font color = 'red'>密码长度必须大于6位！</font>";
+					document.getElementById("uPwd").select();
+					document.getElementById("uPwd").style = "border-color : red;";
+					return;
+			}
+		if(userPwd != userEPwd){
+					document.getElementById("msgEPwd").innerHTML = 
+					"<font color = 'red'>两次输入密码不一致！</font>";
+					document.getElementById("uEPwd").select();
+					document.getElementById("uEPwd").style = "border-color : red;";
+					return;
+			}
+			
+		var date = new Date();
+		var currYear = date.getYear()+1900;
+		var currMonth = date.getMonth()+1;
+		var currDate = date.getDate();
+		var year = document.myForm.userYear.value.trim();
+		var month = document.myForm.userMonth.value;
+		var uDate = document.myForm.userDate.value.trim();
+		document.getElementById("msgYear").innerHTML = "";
+		document.getElementById("msgMonth").innerHTML = "";
+		document.getElementById("msgDate").innerHTML = "";		
+		if(year == ""){
+					document.getElementById("msgYear").innerHTML = 
+					"<font color = 'red'>出生年份必须填写！</font>";
+					document.getElementById("uYear").style = "border-color : red;";
+					return;
+			}
+
+			if(isNaN(year)){
+					document.getElementById("msgYear").innerHTML = 
+					"<font color = 'red'>年份必须是数值！</font>";
+					document.getElementById("uYear").select();
+					document.getElementById("uYear").style = "border-color : red;";
+					return;
+				}
+		if(parseInt(year) < 1900 || parseInt(year) > currYear){
+					document.getElementById("msgYear").innerHTML = 
+					"<font color = 'red'>年份非法！</font>";
+					document.getElementById("uYear").select();
+					document.getElementById("uYear").style = "border-color : red;";
+					return;
+			}
+
+		if(parseInt(month) > currMonth){
+					document.getElementById("msgMonth").innerHTML = 
+					"<font color = 'red'>月份非法！</font>";
+					document.getElementById("uMonth").style = "border-color : red;";
+					
+					return;
+			}
+		if(parseInt(year) == currYear && parseInt(month) > currMonth){
+					document.getElementById("msgMonth").innerHTML = 
+					"<font color = 'red'>月份非法！</font>";
+					document.getElementById("uMonth").style = "border-color : red;";
+					return;
+			}
+		if(!(parseInt(year) % 4 == 0 && parseInt(year) % 100 != 0 || parseInt(year) % 400 == 0)){
+			 if(parseInt(month) == 2 && parseInt(uDate) > 28){
+					document.getElementById("msgDate").innerHTML = 
+					"<font color = 'red'>非闰年2月只有28天！</font>";
+					document.getElementById("uDate").select();
+					document.getElementById("uDate").style = "border-color : red;";
+					return;
+			}
+		}else {
+			if(parseInt(month) == 2 && parseInt(uDate) > 29){
+				document.getElementById("msgDate").innerHTML = 
+					"<font color = 'red'>闰年2月只有29天！</font>";
+					document.getElementById("uDate").select();
+					document.getElementById("uDate").style = "border-color : red;";
+					return;
+			}
+		}
+		if(uDate == ""){
+					document.getElementById("msgDate").innerHTML = 
+					"<font color = 'red'>请填写日期！</font>";
+					document.getElementById("uDate").style = "border-color : red;";
+					return;
+			}
+		
+		if(isNaN(uDate)){
+					document.getElementById("msgDate").innerHTML = 
+					"<font color = 'red'>日期必须是正整数值！</font>";
+					document.getElementById("uDate").select();
+					document.getElementById("uDate").style = "border-color : red;";
+					return;
+				}
+		
+		if(parseInt(month) == 4 || parseInt(month) == 6 || parseInt(month) == 9 || parseInt(month) == 11){
+				if(parseInt(uDate) >= 31){
+					document.getElementById("msgDate").innerHTML = 
+					"<font color = 'red'>当前月的日期要小于31</font>";
+					document.getElementById("uDate").select();
+					document.getElementById("uDate").style = "border-color : red;";
+					return;
+					}
+			}
+		var knows = document.getElementsByName("KNOWS");
+		 var checkVal= ""; 
+		for (i=0;i<knows.length;i++){ 
+			if(knows[i].checked==true){ 
+				checkVal+=knows[i].value; 
+			} 
+		} 
+		  if(checkVal== ""){ 
+					document.getElementById("msgKnow").innerHTML = 
+					"<font color = 'red'>请至少选择一项！</font>";
+					return; 
+		  }
+
+		  /**
+		  不能为空
+		  必须有@和.
+		  @和.不能在首或尾
+		  @不能在.的后面
+		  @不能和.挨着
+		  */
+		  var email = document.myForm.userEmail.value;
+		  document.getElementById("msgEmail").innerHTML = "<font color = 'red'>*</font>";
+		//   if(email == ""){
+		// 			document.getElementById("msgEmail").innerHTML =
+		// 			"<font color = 'red'>邮箱必须填写！</font>";
+		// 			document.getElementById("uEmail").style = "border-color : red;";
+		// 			return;
+		// 	  }
+		//   if(email.length < 6 || email.length > 18){
+		// 			document.getElementById("msgEmail").innerHTML =
+		// 			"<font color = 'red'>邮箱长度为6-18位</font>";
+		// 			document.getElementById("uEmail").select();
+		// 			document.getElementById("uEmail").style = "border-color : red;";
+		//
+		// 			return;
+		// 	  }
+		//  if(email.indexOf('@') == -1 || email.indexOf('.') == -1){
+		// 			document.getElementById("msgEmail").innerHTML =
+		// 			"<font color = 'red'>必须包含'@'或'.'！</font>";
+		// 			document.getElementById("uEmail").select();
+		// 			document.getElementById("uEmail").style = "border-color : red;";
+		// 			return;
+		// 	 }
+		// if(email.indexOf('@') == 0 || email.lastIndexOf('@') == email.length - 1){
+		// 			document.getElementById("msgEmail").innerHTML =
+		// 			"<font color = 'red'>'@'不能在首或尾！</font>";
+		// 			document.getElementById("uEmail").select();
+		// 			document.getElementById("uEmail").style = "border-color : red;";
+		// 			return;
+		// 	}
+		// if(email.indexOf('.') == 0 || email.lastIndexOf('.') == email.length - 1){
+		// 			document.getElementById("msgEmail").innerHTML =
+		// 			"<font color = 'red'>'.'不能在首或尾！</font>";
+		// 			document.getElementById("uEmail").select();
+		// 			document.getElementById("uEmail").style = "border-color : red;";
+		// 			return;
+		// 	}
+		// if(email.indexOf('@') > email.indexOf('.')){
+		// 			document.getElementById("msgEmail").innerHTML =
+		// 			"<font color = 'red'>'@'不能在'.'的后面</font>";
+		// 			document.getElementById("uEmail").select();
+		// 			document.getElementById("uEmail").style = "border-color : red;";
+		// 			return;
+		// 	}
+		// if(email.indexOf('@') + 1 == email.indexOf('.')){
+		// 			document.getElementById("msgEmail").innerHTML =
+		// 			"<font color = 'red'>'@'和'.'不能连在一起</font>";
+		// 			document.getElementById("uEmail").select();
+		// 			document.getElementById("uEmail").style = "border-color : red;";
+		// 			return;
+		// 	}
+		reg = /\w+@\w+[\w\.]+\w+$/;
+		if(!email.test(reg)){
+			document.getElementById("msgEmail").innerHTML =
+					"<font color = 'red'>邮箱非法</font>";
+		}
+}
+		function acceptBtn(obj){
+				document.getElementById("btn").disabled = !obj.checked;
+			}
+  </script>
+  
+ </head>
+ <body>
+  <h1>用户注册</h1>
+	<form action = "#" method = "post" name = "myForm">
+		用户帐号：<input type = "text" name = "userNo" id = "uNo">
+		<div id = "msgNo" style = "display:inline"><font color = "red">*</font></div><br>
+
+		用户昵称：<input type = "text" name = "userName" id = "uName">
+		<div id = "msgName" style = "display:inline"></div><br>
+		用户密码：<input type = "password" name = "userPwd" size = "21" id = "uPwd">
+		<div id = "msgPwd" style = "display:inline"><font color = "red">*</font></div><br>
+
+		确认密码：<input type = "password" name = "userEPwd" size = "21" id = "uEPwd">
+		<div id = "msgEPwd" style = "display:inline"><font color = "red">*</font></div><br>
+		性别：<input type = "radio" name = "userSex" checked = "checked">男&nbsp;
+			  <input type = "radio" name = "userSex">女<p>
+		出生日期<input type = "text" name = "userYear" size = "4" maxlength = "4" id = "uYear">年&nbsp;
+		<select name = "userMonth" >
+			<optgroup label = "第一季">
+				<option name = "1">1月</option>
+				<option name = "2">2月</option>
+				<option name = "3">3月</option>
+			</optgroup>
+				<optgroup label = "第二季">
+				<option name = "4">4月</option>
+				<option name = "5">5月</option>
+				<option name = "6" selected = "selected">6月</option>
+			</optgroup>
+				<optgroup label = "第三季">
+				<option name = "7">7月</option>
+				<option name = "8">8月</option>
+				<option name = "9">9月</option>
+			</optgroup>
+				<optgroup label = "第四季">
+				<option name = "10">10月</option>
+				<option name = "11">11月</option>
+				<option name = "12">12月</option>
+			</optgroup>
+		</select>&nbsp;
+		<input type = "text" name = "userDate" size = "4" maxlength = "2" id = "uDate">日
+		<div id = "msgDate" style = "display:inline"></div><p>
+		<div id = "msgYear" style = "display:inline"></div><br>
+		邮箱：<input type = "text" name = "userEmail" id = "uEmail">
+		<div id = "msgEmail" style = "display:inline"><font color = "red">*</font></div><p>
+		您从哪里知道本网站：<input type = "checkbox" name = "KNOWS" value = "TV">电视&nbsp;
+		<input type = "checkbox" name = "KNOWS" value = "NET">网络&nbsp;
+		<input type = "checkbox" name = "KNOWS" value = "NEWS">新闻&nbsp;
+		<input type = "checkbox" name = "KNOWS" value = "OTHER">其他
+		<div id = "msgKnow" style = "display : inline"></div><p>
+		<input type = "reset" name = "reset" value = "重置">&nbsp;&nbsp;
+		<input type = "button" id = "btn" value = "同意以下协议，并注册" disabled = "disabled" onclick = "validateData()"><p>
+		<textarea readonly = "readonly">
+1
+2
+3
+4
+5
+		</textarea><p>
+<input type = "checkbox" name = "recept" onclick = "acceptBtn(this)">同意<br>
+	</form>
+ </body>
+</html>

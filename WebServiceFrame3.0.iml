@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="JAVA_MODULE" version="4">
+  <component name="EclipseModuleManager">
+    <libelement value="jar://$MODULE_DIR$/WEB-INF/lib/jaxen-core.jar!/" />
+    <libelement value="jar://$MODULE_DIR$/WEB-INF/lib/jaxen-jdom.jar!/" />
+    <libelement value="jar://$MODULE_DIR$/WEB-INF/lib/jdom-1.1.1.zip!/" />
+    <libelement value="jar://$MODULE_DIR$/WEB-INF/lib/jdom.jar!/" />
+    <libelement value="jar://$MODULE_DIR$/WEB-INF/lib/saxpath.jar!/" />
+    <src_description expected_position="0">
+      <src_folder value="file://$MODULE_DIR$/src" expected_position="0" />
+    </src_description>
+  </component>
+  <component name="NewModuleRootManager">
+    <output url="file://$MODULE_DIR$/bin" />
+    <exclude-output />
+    <content url="file://$MODULE_DIR$">
+      <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" />
+    </content>
+    <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="module-library">
+      <library name="jaxen-core.jar">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/WEB-INF/lib/jaxen-core.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="jaxen-jdom.jar">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/WEB-INF/lib/jaxen-jdom.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="jdom-1.1.1.zip">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/WEB-INF/lib/jdom-1.1.1.zip!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="jdom.jar">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/WEB-INF/lib/jdom.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="saxpath.jar">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/WEB-INF/lib/saxpath.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="library" name="classes12" level="project" />
+  </component>
+</module>

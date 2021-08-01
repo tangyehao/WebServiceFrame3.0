@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="Generator" content="EditPlus®">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  <title>Document</title>
+  <script>
+	function dateFormat(m){
+			m = m + "";
+			if(m.length == 1){
+				return "0"+m;
+				}
+				return m;
+		}
+
+	function TimeFormat(d){
+			
+			var year =  dateFormat(d.getYear()+1900);
+			var month =  dateFormat(d.getMonth()+1);
+			var date =  dateFormat(d.getDate());
+
+			var h =  dateFormat(d.getHours());
+			var m =  dateFormat(d.getMinutes());
+			var s =  dateFormat(d.getSeconds());
+			
+			if(h > 12){
+					return year+"年"+month+"月"+date+"日"+(h-12)+":"+m+":"+s+"PM";
+				}
+			return year+"年"+month+"月"+date+"日"+h+":"+m+":"+s+"AM";
+		}
+
+		function timeTest(){
+				var d = new Date();
+				var times = TimeFormat(d);
+				document.getElementById("d1").innerText = times;
+				//setTimeout("TimeTest()",1000);
+				
+				setInterval("timeTest()",1000);
+			}
+
+		
+  </script>
+ </head>
+ <body onload = "timeTest()">
+
+<h2 color=turquoise>今天是<div id = "d1" style="display: inline"></div></h2>
+ </body>
+
+</html>
